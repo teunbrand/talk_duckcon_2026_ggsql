@@ -1,0 +1,17 @@
+# ggsql:<br>A grammar of graphics for SQL {background-color="#DEF1EB" .smaller}
+
+Teun van den Brand  
+DuckCon #7, Amsterdam  
+2026-06-21
+
+## First Slide
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi bibendum varius erat id volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur sapien erat, accumsan quis lobortis in, suscipit in neque. Praesent nec ex at sem pretium consequat a ut leo. Sed tincidunt faucibus ultrices. Nunc ut sapien non ligula iaculis efficitur non vitae elit. In at semper dui. Morbi bibendum, risus at gravida ullamcorper, leo orci porttitor ante, eget vestibulum odio lorem sed nulla. Fusce et fermentum libero.
+
+## Second slide
+
+Praesent quis odio non quam venenatis varius in id lacus. Sed eu nisl sit amet nibh pulvinar pharetra. Etiam at sollicitudin metus. Sed condimentum, lorem id commodo fringilla, metus felis vulputate leo, a vulputate neque felis dapibus est. Nulla sed massa auctor, accumsan est vitae, facilisis urna. Maecenas ut vulputate sapien. Sed accumsan tortor eros, quis ullamcorper purus mattis et. Nam in ornare nunc. Curabitur convallis in mauris rhoncus iaculis. Ut aliquam, erat consequat finibus pulvinar, eros risus dictum purus, ac cursus neque purus sit amet nibh. Aliquam sit amet enim pellentesque enim feugiat congue vitae tempor leo. Vestibulum maximus lorem non commodo porttitor. Cras sed placerat eros. Vivamus faucibus rhoncus est, sed venenatis massa fringilla ut. Aliquam luctus nunc augue, quis euismod eros mattis non.
+
+## Third slide
+
+Donec non ipsum sollicitudin, tempus lacus sed, placerat neque. Pellentesque bibendum tincidunt gravida. Nam tempus magna ac quam faucibus, ut vehicula ante commodo. Mauris a justo varius, suscipit purus sed, aliquam quam. Aliquam eros justo, eleifend at mi at, pretium pretium tellus. Pellentesque vitae cursus lorem, non auctor nisl. Morbi diam libero, iaculis quis elit in, pellentesque condimentum ex. Integer in ipsum vehicula tellus viverra auctor sed eget est. Donec dapibus sem lorem, sit amet vehicula ex efficitur vel. In eget urna quis dolor placerat commodo. Cras sit amet diam ac lectus aliquet lobortis quis nec sapien. Etiam faucibus tincidunt ex, non ultrices magna viverra sed. Aliquam risus ex, blandit ut quam ut, convallis efficitur elit. Cras lacinia, diam quis molestie maximus, ligula neque imperdiet leo, quis consectetur erat orci non est.

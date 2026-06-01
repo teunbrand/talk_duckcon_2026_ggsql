@@ -1,0 +1,24 @@
+project:
+  title: "ggsql: A grammar of graphics for SQL"
+  type: website
+  resources:
+    - assets/**
+
+website:
+  title: "ggsql"
+
+format:
+  revealjs:
+    theme: brand
+    lightbox: auto
+    highlight-style: pygments
+    syntax-definitions: 
+      - ggsql.xml
+    smaller: true
+    code-line-numbers: false
+    transition: fade
+    transition-speed: fast
+    css: styles.css
+
+execute:
+  echo: true

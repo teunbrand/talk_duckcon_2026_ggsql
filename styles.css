@@ -1,0 +1,11 @@
+/* css styles */
+
+.reveal div.sourceCode pre {
+  font-size: 1.35rem;
+  line-height: 1.3;
+}
+
+.reveal table {
+  width: 100%;
+  font-size: 0.8em;
+}
