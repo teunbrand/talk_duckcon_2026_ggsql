@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#first-slide",
+    "href": "talk_duckcon_2026_ggsql.html#first-slide",
+    "title": "ggsql: A grammar of graphics for SQL",
+    "section": "First Slide",
+    "text": "First Slide\nHere be a code block\n\nSELECT * FROM ggsql:penguins\nWHERE island == 'Biscoe'\nLIMIT 5\n\n\n\n\nspecies\nisland\nbill_len\nbill_dep\nflipper_len\nbody_mass\nsex\nyear\n\n\n\n\nAdelie\nBiscoe\n37.8\n18.3\n174\n3400\nfemale\n2007\n\n\nAdelie\nBiscoe\n37.7\n18.7\n180\n3600\nmale\n2007\n\n\nAdelie\nBiscoe\n35.9\n19.2\n189\n3800\nfemale\n2007\n\n\nAdelie\nBiscoe\n38.2\n18.1\n185\n3950\nmale\n2007\n\n\nAdelie\nBiscoe\n38.8\n17.2\n180\n3800\nmale\n2007"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#second-slide",
+    "href": "talk_duckcon_2026_ggsql.html#second-slide",
+    "title": "ggsql: A grammar of graphics for SQL",
+    "section": "Second slide",
+    "text": "Second slide\nPraesent quis odio non quam venenatis varius in id lacus. Sed eu nisl sit amet nibh pulvinar pharetra. Etiam at sollicitudin metus. Sed condimentum, lorem id commodo fringilla, metus felis vulputate leo, a vulputate neque felis dapibus est. Nulla sed massa auctor, accumsan est vitae, facilisis urna. Maecenas ut vulputate sapien. Sed accumsan tortor eros, quis ullamcorper purus mattis et. Nam in ornare nunc. Curabitur convallis in mauris rhoncus iaculis. Ut aliquam, erat consequat finibus pulvinar, eros risus dictum purus, ac cursus neque purus sit amet nibh. Aliquam sit amet enim pellentesque enim feugiat congue vitae tempor leo. Vestibulum maximus lorem non commodo porttitor. Cras sed placerat eros. Vivamus faucibus rhoncus est, sed venenatis massa fringilla ut. Aliquam luctus nunc augue, quis euismod eros mattis non."
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#third-slide",
+    "href": "talk_duckcon_2026_ggsql.html#third-slide",
+    "title": "ggsql: A grammar of graphics for SQL",
+    "section": "Third slide",
+    "text": "Third slide\nDonec non ipsum sollicitudin, tempus lacus sed, placerat neque. Pellentesque bibendum tincidunt gravida. Nam tempus magna ac quam faucibus, ut vehicula ante commodo. Mauris a justo varius, suscipit purus sed, aliquam quam. Aliquam eros justo, eleifend at mi at, pretium pretium tellus. Pellentesque vitae cursus lorem, non auctor nisl. Morbi diam libero, iaculis quis elit in, pellentesque condimentum ex. Integer in ipsum vehicula tellus viverra auctor sed eget est. Donec dapibus sem lorem, sit amet vehicula ex efficitur vel. In eget urna quis dolor placerat commodo. Cras sit amet diam ac lectus aliquet lobortis quis nec sapien. Etiam faucibus tincidunt ex, non ultrices magna viverra sed. Aliquam risus ex, blandit ut quam ut, convallis efficitur elit. Cras lacinia, diam quis molestie maximus, ligula neque imperdiet leo, quis consectetur erat orci non est."
+  }
+]
