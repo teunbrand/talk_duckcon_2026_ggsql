@@ -12,13 +12,22 @@ format:
     theme: brand
     lightbox: auto
     highlight-style: pygments
-    syntax-definitions: 
+    syntax-definitions:
       - ggsql.xml
     smaller: true
     code-line-numbers: false
     transition: fade
     transition-speed: fast
     css: styles.css
+    include-in-header:
+      text: |
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          Reveal.on('slidechanged', function() {
+            window.dispatchEvent(new Event('resize'));
+          });
+        });
+        </script>
 
 execute:
   echo: true

@@ -1,17 +1,456 @@
-# ggsql:<br>A grammar of graphics for SQL {background-color="#DEF1EB" .smaller}
+---
+title: "ggsql:<br>A grammar of graphics for SQL"
+author: "Teun van den Brand"
+date: "2026-06-21"
+subtitle: "DuckCon #7, Amsterdam"
+title-slide-attributes:
+  data-background-color: "#DEF1EB"
+---
 
-Teun van den Brand  
-DuckCon #7, Amsterdam  
-2026-06-21
+## What is ggsql?
 
-## First Slide
+::: {.centered}
+Grammar of Graphics  
++  
+Structured Query Language
+![](assets/icon_composed.svg){width=100%}
+:::
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi bibendum varius erat id volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur sapien erat, accumsan quis lobortis in, suscipit in neque. Praesent nec ex at sem pretium consequat a ut leo. Sed tincidunt faucibus ultrices. Nunc ut sapien non ligula iaculis efficitur non vitae elit. In at semper dui. Morbi bibendum, risus at gravida ullamcorper, leo orci porttitor ante, eget vestibulum odio lorem sed nulla. Fusce et fermentum libero.
+## A quick example
 
-## Second slide
+```{ggsql}
+#| code-line-numbers: "1-2"
+SELECT * FROM 'assets/penguins.parquet'
+  WHERE island == 'Biscoe'
+  LIMIT 5
+```
 
-Praesent quis odio non quam venenatis varius in id lacus. Sed eu nisl sit amet nibh pulvinar pharetra. Etiam at sollicitudin metus. Sed condimentum, lorem id commodo fringilla, metus felis vulputate leo, a vulputate neque felis dapibus est. Nulla sed massa auctor, accumsan est vitae, facilisis urna. Maecenas ut vulputate sapien. Sed accumsan tortor eros, quis ullamcorper purus mattis et. Nam in ornare nunc. Curabitur convallis in mauris rhoncus iaculis. Ut aliquam, erat consequat finibus pulvinar, eros risus dictum purus, ac cursus neque purus sit amet nibh. Aliquam sit amet enim pellentesque enim feugiat congue vitae tempor leo. Vestibulum maximus lorem non commodo porttitor. Cras sed placerat eros. Vivamus faucibus rhoncus est, sed venenatis massa fringilla ut. Aliquam luctus nunc augue, quis euismod eros mattis non.
+## A quick example
 
-## Third slide
+```{ggsql}
+#| code-line-numbers: "1-2"
+INSTALL ggsql FROM community;
+LOAD ggsql;
 
-Donec non ipsum sollicitudin, tempus lacus sed, placerat neque. Pellentesque bibendum tincidunt gravida. Nam tempus magna ac quam faucibus, ut vehicula ante commodo. Mauris a justo varius, suscipit purus sed, aliquam quam. Aliquam eros justo, eleifend at mi at, pretium pretium tellus. Pellentesque vitae cursus lorem, non auctor nisl. Morbi diam libero, iaculis quis elit in, pellentesque condimentum ex. Integer in ipsum vehicula tellus viverra auctor sed eget est. Donec dapibus sem lorem, sit amet vehicula ex efficitur vel. In eget urna quis dolor placerat commodo. Cras sit amet diam ac lectus aliquet lobortis quis nec sapien. Etiam faucibus tincidunt ex, non ultrices magna viverra sed. Aliquam risus ex, blandit ut quam ut, convallis efficitur elit. Cras lacinia, diam quis molestie maximus, ligula neque imperdiet leo, quis consectetur erat orci non est.
+SELECT * FROM 'assets/penguins.parquet'
+  WHERE island == 'Biscoe'
+```
+
+## A quick example
+
+```{ggsql}
+#| code-line-numbers: "7-8"
+INSTALL ggsql FROM community;
+LOAD ggsql;
+
+SELECT * FROM 'assets/penguins.parquet'
+  WHERE island == 'Biscoe'
+
+VISUALISE bill_len AS x, bill_dep AS y, species AS colour
+  DRAW point
+```
+
+## {background-iframe="https://ggsql.org/" background-interactive=true}
+
+## Why are we building this?
+
+* 18 years of ggplot2 development
+    * What works
+    * What doesn't work
+* Carte blanche
+* SQL new terrain
+
+## Visualisation gap
+
+![](assets/ecosystem_1.svg)
+
+## Visualisation gap
+
+![](assets/ecosystem_2.svg)
+
+## Visualisation gap
+
+![](assets/ecosystem_3.svg)
+
+---
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Visualisation gap
+
+Alternative: A functional approach
+
+```{.ggsql}
+INSTALL miniplot FROM community;
+LOAD miniplot;
+
+SELECT 
+scatter_chart(
+  list(bill_len),
+  list(bill_dep),
+  'Penguins'
+) 
+FROM 'assets/penguins.parquet'
+WHERE island == 'Biscoe';
+```
+
+:::
+
+::: {.column width="50%"}
+
+![](assets/miniplot_example.png)
+
+:::
+
+::::
+
+## Visualisation gap
+
+Alternative: Closed source point and click BI tools
+
+![](assets/powerbi_screenshot.png)
+
+## Grammar of Graphics
+
+![](assets/gog.svg)
+
+---
+
+:::: {.columns}
+
+::: {.column}
+
+#### SQL
+
+* Declarative
+    * Information structures
+    * 'Give revenue grouped by month'
+* Compositional
+    * select, group by, where
+* Portable execution
+    * DuckDB, PostgreSQL, MySQL
+
+:::
+
+::: {.column}
+
+#### Grammar of graphics
+
+* Declarative
+    * Information encodings
+    * 'Show revenue as bars by month'
+* Compositional
+    * layer, scales, facets
+* Portable execution
+    * ggplot2, Vega-Lite, plotnine
+
+:::
+
+::::
+
+![](assets/handshake.png){style="height:30vh; width:auto; display:block; margin:auto;"}
+
+---
+
+:::: {.columns}
+
+::: {.column}
+
+### No runtime
+
+* Distribution of executable
+* No bundling of R/python
+* Sandboxed scope
+* Variety of integrations
+    * DuckDB extension, CLI, Jupyter kernel
+
+:::
+
+::: {.column}
+
+![](assets/no_running.jpg){style="height:50vh; width:auto"}
+
+:::
+
+::::
+
+---
+
+:::: {.columns}
+
+### LLM-tooling
+
+::: {.column}
+* Assistants well-versed in SQL
+    * Resembles structured natural language
+    * Declarative
+    * Small core grammar
+    * Short context
+* LLMs as interface for data visualisation
+    * [QueryChat](https://posit-dev.github.io/querychat/)
+* [ggsql skill](https://github.com/posit-dev/skills/blob/main/ggsql/ggsql/SKILL.md)
+:::
+
+::: {.column}
+![](assets/clippy.webp)
+:::
+
+::::
+
+---
+
+:::: {.columns}
+
+::: {.column}
+
+### How does it work?
+
+* User query
+    * Tree sitter
+    * AST
+* Reader
+    * Query DB
+    * Computed summaries
+* Writer
+    * JSON spec (Vega-Lite)
+    * Future work
+
+:::
+
+::: {.column}
+![](assets/howitworks.svg)
+:::
+
+::::
+
+## Minard example
+
+![](assets/minard.png)
+
+## Minard example
+
+```{ggsql}
+#| code-line-numbers: "1"
+SELECT * FROM 'assets/minard_troops.csv' 
+LIMIT 5
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "2-3"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "4"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    PARTITION BY direction, group
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "4"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke
+    PARTITION BY direction, group
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "4"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "6-7"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "8"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "6-8"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "1,10-11"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic
+    SETTING origin => (30, 55)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "4-6"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic
+    SETTING origin => (30, 55)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "15"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic SETTING 
+    origin => (30, 55), 
+    bounds => (-500000, -150000, 500000, 150000)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+---
+
+```{ggsql}
+#| code-line-numbers: "19-25"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING direction AS stroke, survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic SETTING 
+    origin => (30, 55), 
+    bounds => (-500000, -150000, 500000, 150000)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+  LABEL
+    title => 'Napoleon\'s Russian Campaign',
+    subtitle => 'Inspired by the graphic of C.J. Minard',
+    linewidth => 'Troops',
+    stroke => 'Direction'
+```
+
+
+## Get yours today
+
+* [ggsql.org](https://ggsql.org/) interactive example
+    * language support ([Positron](https://positron.posit.co/) / VS Code)
+    * kernel for Jupyter and [Quarto](https://quarto.org/)
+    * command line interface
+    * [R](https://r.ggsql.org/)/[python](https://pypi.org/project/ggsql/) wrappers
+    * [WebAssembly](https://www.npmjs.com/package/ggsql-wasm)
+
+```{.ggsql}
+INSTALL ggsql FROM community;
+LOAD ggsql;
+```
+
+## In closing
+
+* New SQL-based tool for data visualisation
+* Based on declarative grammar of graphics
+* DuckDB is first citizen
+
+## Thank you!
+
+<!-- Mention Thomas, George, Hadley -->
+<!-- Mention Posit -->
