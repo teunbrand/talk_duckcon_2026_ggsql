@@ -16,6 +16,7 @@ format:
       - ggsql.xml
     smaller: true
     code-line-numbers: false
+    title-slide: false
     transition: fade
     transition-speed: fast
     css: styles.css

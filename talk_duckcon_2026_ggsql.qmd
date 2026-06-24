@@ -1,11 +1,14 @@
----
-title: "ggsql:<br>A grammar of graphics for SQL"
-author: "Teun van den Brand"
-date: "2026-06-21"
-subtitle: "DuckCon #7, Amsterdam"
-title-slide-attributes:
-  data-background-color: "#DEF1EB"
----
+## {background-color="#DEF1EB"}
+
+### **ggsql:**<br>**A grammar of graphics for SQL**
+
+Teun van den Brand  
+DuckCon #7, Amsterdam  
+2026-06-24
+
+:::r-stack
+![](assets/hex.png){width="400"}
+:::
 
 ## What is ggsql?
 
@@ -16,16 +19,15 @@ Structured Query Language
 ![](assets/icon_composed.svg){width=100%}
 :::
 
-## A quick example
+## A quick example {auto-animate=true}
 
 ```{ggsql}
 #| code-line-numbers: "1-2"
 SELECT * FROM 'assets/penguins.parquet'
   WHERE island == 'Biscoe'
-  LIMIT 5
 ```
 
-## A quick example
+## A quick example {auto-animate=true}
 
 ```{ggsql}
 #| code-line-numbers: "1-2"
@@ -36,7 +38,7 @@ SELECT * FROM 'assets/penguins.parquet'
   WHERE island == 'Biscoe'
 ```
 
-## A quick example
+## A quick example {auto-animate=true}
 
 ```{ggsql}
 #| code-line-numbers: "7-8"
@@ -46,29 +48,76 @@ LOAD ggsql;
 SELECT * FROM 'assets/penguins.parquet'
   WHERE island == 'Biscoe'
 
+VISUALISE bill_len AS x, bill_dep AS y
+  DRAW point
+```
+
+## A quick example {auto-animate=true}
+
+```{ggsql}
+#| code-line-numbers: "9"
+INSTALL ggsql FROM community;
+LOAD ggsql;
+
+SELECT * FROM 'assets/penguins.parquet'
+  WHERE island == 'Biscoe'
+
+VISUALISE bill_len AS x, bill_dep AS y
+  DRAW point
+  DRAW smooth
+```
+
+## A quick example
+
+```{ggsql}
+#| code-line-numbers: "7"
+INSTALL ggsql FROM community;
+LOAD ggsql;
+
+SELECT * FROM 'assets/penguins.parquet'
+  WHERE island == 'Biscoe'
+
 VISUALISE bill_len AS x, bill_dep AS y, species AS colour
   DRAW point
+  DRAW smooth
 ```
 
 ## {background-iframe="https://ggsql.org/" background-interactive=true}
 
-## Why are we building this?
+## ggplot2 is most popular visualisation method in R
 
 * 18 years of ggplot2 development
-    * What works
-    * What doesn't work
-* Carte blanche
-* SQL new terrain
+* Constrained by backward compatibility
+* ggsql is carte blanche for new ideas
 
-## Visualisation gap
+```{ggsql}
+#| echo: false
+SELECT count / 1000000.0 AS millions, * FROM 'assets/cranlogs.parquet'
+VISUALISE date AS x, millions AS y, package AS stroke
+  DRAW line
+  SCALE stroke 
+    FROM ('ggplot2', 'Rcpp', 'jsonlite', 'plotly', 'tinyplot')
+    TO ('red', 'darkgrey', 'dimgray', 'grey', 'gainsboro')
+  SCALE y RENAMING * => '{:num}M'
+  LABEL
+    y => 'Montly Downloads',
+    x => null,
+    stroke => 'Package'
+```
+
+## Grammar of Graphics
+
+![](assets/gog.svg)
+
+## Why are we building **this**?
 
 ![](assets/ecosystem_1.svg)
 
-## Visualisation gap
+## Why are we building **this**?
 
 ![](assets/ecosystem_2.svg)
 
-## Visualisation gap
+## Why are we building **this**?
 
 ![](assets/ecosystem_3.svg)
 
@@ -78,9 +127,9 @@ VISUALISE bill_len AS x, bill_dep AS y, species AS colour
 
 ::: {.column width="50%"}
 
-### Visualisation gap
+### Why are we not building that?
 
-Alternative: A functional approach
+A functional approach
 
 ```{.ggsql}
 INSTALL miniplot FROM community;
@@ -93,7 +142,7 @@ scatter_chart(
   'Penguins'
 ) 
 FROM 'assets/penguins.parquet'
-WHERE island == 'Biscoe';
+WHERE island == 'Biscoe'
 ```
 
 :::
@@ -106,15 +155,11 @@ WHERE island == 'Biscoe';
 
 ::::
 
-## Visualisation gap
+## Why are we not building that?
 
-Alternative: Closed source point and click BI tools
+Closed source point and click BI tools
 
 ![](assets/powerbi_screenshot.png)
-
-## Grammar of Graphics
-
-![](assets/gog.svg)
 
 ---
 
@@ -158,11 +203,312 @@ Alternative: Closed source point and click BI tools
 
 ::: {.column}
 
-### No runtime
+### How does it work?
 
-* Distribution of executable
-* No bundling of R/python
-* Sandboxed scope
+* User query
+    * Tree sitter
+    * AST
+* Reader
+    * Query DB
+    * Computed summaries
+* Writer
+    * JSON spec (Vega-Lite)
+    * Future work
+
+:::
+
+::: {.column}
+
+![](assets/howitworks.svg){style="height:70vh; width:auto;"}
+
+:::
+
+::::
+
+## Minard example
+
+![](assets/minard.png)
+
+## Minard example
+
+```{ggsql}
+#| code-line-numbers: "1"
+SELECT * FROM 'assets/minard_troops.csv' 
+LIMIT 5
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "2-3"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "4"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    PARTITION BY direction, group
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "4"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING direction AS stroke
+    PARTITION BY direction, group
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "6"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "8-9"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "10"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "8-10"
+#| output-location: column
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "1,12-13"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO mercator
+    SETTING origin => (30, 55)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "4-6"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO mercator
+    SETTING origin => (30, 55)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "15"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO albers
+    SETTING origin => (30, 55)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "15"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic
+    SETTING origin => (30, 55)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "17"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic SETTING 
+    origin => (30, 55), 
+    bounds => (-500000, -150000, 500000, 150000)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+```
+
+## {auto-animate=true auto-animate-unmatched=false}
+
+```{ggsql}
+#| code-line-numbers: "21-27"
+#| output-location: column
+LOAD spatial;
+SELECT * FROM 'assets/minard_troops.csv' 
+VISUALISE long AS x, lat AS y
+  DRAW spatial MAPPING FROM 'assets/countries.parquet'
+    SETTING fill => 'cornsilk'
+    FILTER continent == 'Europe'
+  DRAW path
+    MAPPING 
+      direction AS stroke, 
+      survivors AS linewidth
+    PARTITION BY direction, group
+  DRAW text
+    MAPPING city AS label FROM 'assets/minard_cities.csv'
+    SETTING fontsize => 6
+  PROJECT x, y TO orthographic SETTING 
+    origin => (30, 55), 
+    bounds => (-500000, -150000, 500000, 150000)
+  SCALE stroke TO ('burlywood', 'black')
+    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
+  SCALE linewidth FROM (0, null) TO (0, 20)
+  LABEL
+    title => 'Napoleon\'s Russian Campaign',
+    subtitle => 'Inspired by the graphic of C.J. Minard',
+    linewidth => 'Troops',
+    stroke => 'Direction'
+```
+
+
+---
+
+:::: {.columns}
+
+::: {.column}
+
+### Works wherever
+
+* Distributed as standalone executable
+* No bundling of R/Python
+* Constrained execution
 * Variety of integrations
     * DuckDB extension, CLI, Jupyter kernel
 
@@ -199,245 +545,18 @@ Alternative: Closed source point and click BI tools
 
 ::::
 
----
-
-:::: {.columns}
-
-::: {.column}
-
-### How does it work?
-
-* User query
-    * Tree sitter
-    * AST
-* Reader
-    * Query DB
-    * Computed summaries
-* Writer
-    * JSON spec (Vega-Lite)
-    * Future work
-
-:::
-
-::: {.column}
-![](assets/howitworks.svg)
-:::
-
-::::
-
-## Minard example
-
-![](assets/minard.png)
-
-## Minard example
-
-```{ggsql}
-#| code-line-numbers: "1"
-SELECT * FROM 'assets/minard_troops.csv' 
-LIMIT 5
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "2-3"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "4"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    PARTITION BY direction, group
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "4"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    MAPPING direction AS stroke
-    PARTITION BY direction, group
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "4"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "6-7"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "8"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-  SCALE linewidth FROM (0, null) TO (0, 20)
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "6-8"
-#| output-location: column
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  DRAW text
-    MAPPING city AS label FROM 'assets/minard_cities.csv'
-    SETTING fontsize => 6
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-  SCALE linewidth FROM (0, null) TO (0, 20)
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "1,10-11"
-#| output-location: column
-LOAD spatial;
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  DRAW text
-    MAPPING city AS label FROM 'assets/minard_cities.csv'
-    SETTING fontsize => 6
-  PROJECT x, y TO orthographic
-    SETTING origin => (30, 55)
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-  SCALE linewidth FROM (0, null) TO (0, 20)
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "4-6"
-#| output-location: column
-LOAD spatial;
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW spatial MAPPING FROM 'assets/countries.parquet'
-    SETTING fill => 'cornsilk'
-    FILTER continent == 'Europe'
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  DRAW text
-    MAPPING city AS label FROM 'assets/minard_cities.csv'
-    SETTING fontsize => 6
-  PROJECT x, y TO orthographic
-    SETTING origin => (30, 55)
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-  SCALE linewidth FROM (0, null) TO (0, 20)
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "15"
-#| output-location: column
-LOAD spatial;
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW spatial MAPPING FROM 'assets/countries.parquet'
-    SETTING fill => 'cornsilk'
-    FILTER continent == 'Europe'
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  DRAW text
-    MAPPING city AS label FROM 'assets/minard_cities.csv'
-    SETTING fontsize => 6
-  PROJECT x, y TO orthographic SETTING 
-    origin => (30, 55), 
-    bounds => (-500000, -150000, 500000, 150000)
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-  SCALE linewidth FROM (0, null) TO (0, 20)
-```
-
----
-
-```{ggsql}
-#| code-line-numbers: "19-25"
-#| output-location: column
-LOAD spatial;
-SELECT * FROM 'assets/minard_troops.csv' 
-VISUALISE long AS x, lat AS y
-  DRAW spatial MAPPING FROM 'assets/countries.parquet'
-    SETTING fill => 'cornsilk'
-    FILTER continent == 'Europe'
-  DRAW path
-    MAPPING direction AS stroke, survivors AS linewidth
-    PARTITION BY direction, group
-  DRAW text
-    MAPPING city AS label FROM 'assets/minard_cities.csv'
-    SETTING fontsize => 6
-  PROJECT x, y TO orthographic SETTING 
-    origin => (30, 55), 
-    bounds => (-500000, -150000, 500000, 150000)
-  SCALE stroke TO ('burlywood', 'black')
-    RENAMING 'A' => 'Advance', 'R' => 'Retreat'
-  SCALE linewidth FROM (0, null) TO (0, 20)
-  LABEL
-    title => 'Napoleon\'s Russian Campaign',
-    subtitle => 'Inspired by the graphic of C.J. Minard',
-    linewidth => 'Troops',
-    stroke => 'Direction'
-```
-
-
 ## Get yours today
+
+Goal:  
+*Available wherever SQL is*
 
 * [ggsql.org](https://ggsql.org/) interactive example
     * language support ([Positron](https://positron.posit.co/) / VS Code)
     * kernel for Jupyter and [Quarto](https://quarto.org/)
     * command line interface
-    * [R](https://r.ggsql.org/)/[python](https://pypi.org/project/ggsql/) wrappers
+    * [R](https://r.ggsql.org/)/[Python](https://pypi.org/project/ggsql/) wrappers
     * [WebAssembly](https://www.npmjs.com/package/ggsql-wasm)
+* DuckDB extension:
 
 ```{.ggsql}
 INSTALL ggsql FROM community;
@@ -448,9 +567,18 @@ LOAD ggsql;
 
 * New SQL-based tool for data visualisation
 * Based on declarative grammar of graphics
-* DuckDB is first citizen
+* DuckDB is a first-class citizen
+
+:::r-stack
+![](assets/hex.png){width="400"}
+:::
 
 ## Thank you!
 
-<!-- Mention Thomas, George, Hadley -->
-<!-- Mention Posit -->
+![](assets/collabs.svg)
+
+Posit PBC:
+
+* Thomas Lin Pedersen
+* George Stagg
+* Hadley Wickham
