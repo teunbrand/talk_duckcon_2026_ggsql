@@ -1,0 +1,1 @@
+Sitemap: https://teunbrand.github.io/talk_duckcon_2026_ggsql/sitemap.xml

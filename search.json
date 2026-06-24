@@ -1,23 +1,219 @@
 [
   {
-    "objectID": "talk_duckcon_2026_ggsql.html#first-slide",
-    "href": "talk_duckcon_2026_ggsql.html#first-slide",
-    "title": "ggsql: A grammar of graphics for SQL",
-    "section": "First Slide",
-    "text": "First Slide\nHere be a code block\n\nSELECT * FROM ggsql:penguins\nWHERE island == 'Biscoe'\nLIMIT 5\n\n\n\n\nspecies\nisland\nbill_len\nbill_dep\nflipper_len\nbody_mass\nsex\nyear\n\n\n\n\nAdelie\nBiscoe\n37.8\n18.3\n174\n3400\nfemale\n2007\n\n\nAdelie\nBiscoe\n37.7\n18.7\n180\n3600\nmale\n2007\n\n\nAdelie\nBiscoe\n35.9\n19.2\n189\n3800\nfemale\n2007\n\n\nAdelie\nBiscoe\n38.2\n18.1\n185\n3950\nmale\n2007\n\n\nAdelie\nBiscoe\n38.8\n17.2\n180\n3800\nmale\n2007"
+    "objectID": "talk_duckcon_2026_ggsql.html#section",
+    "href": "talk_duckcon_2026_ggsql.html#section",
+    "title": "ggsql",
+    "section": "",
+    "text": "ggsql:A grammar of graphics for SQL\nTeun van den Brand\nDuckCon #7, Amsterdam\n2026-06-24"
   },
   {
-    "objectID": "talk_duckcon_2026_ggsql.html#second-slide",
-    "href": "talk_duckcon_2026_ggsql.html#second-slide",
-    "title": "ggsql: A grammar of graphics for SQL",
-    "section": "Second slide",
-    "text": "Second slide\nPraesent quis odio non quam venenatis varius in id lacus. Sed eu nisl sit amet nibh pulvinar pharetra. Etiam at sollicitudin metus. Sed condimentum, lorem id commodo fringilla, metus felis vulputate leo, a vulputate neque felis dapibus est. Nulla sed massa auctor, accumsan est vitae, facilisis urna. Maecenas ut vulputate sapien. Sed accumsan tortor eros, quis ullamcorper purus mattis et. Nam in ornare nunc. Curabitur convallis in mauris rhoncus iaculis. Ut aliquam, erat consequat finibus pulvinar, eros risus dictum purus, ac cursus neque purus sit amet nibh. Aliquam sit amet enim pellentesque enim feugiat congue vitae tempor leo. Vestibulum maximus lorem non commodo porttitor. Cras sed placerat eros. Vivamus faucibus rhoncus est, sed venenatis massa fringilla ut. Aliquam luctus nunc augue, quis euismod eros mattis non."
+    "objectID": "talk_duckcon_2026_ggsql.html#what-is-ggsql",
+    "href": "talk_duckcon_2026_ggsql.html#what-is-ggsql",
+    "title": "ggsql",
+    "section": "What is ggsql?",
+    "text": "What is ggsql?\n\nGrammar of Graphics\n+\nStructured Query Language"
   },
   {
-    "objectID": "talk_duckcon_2026_ggsql.html#third-slide",
-    "href": "talk_duckcon_2026_ggsql.html#third-slide",
-    "title": "ggsql: A grammar of graphics for SQL",
-    "section": "Third slide",
-    "text": "Third slide\nDonec non ipsum sollicitudin, tempus lacus sed, placerat neque. Pellentesque bibendum tincidunt gravida. Nam tempus magna ac quam faucibus, ut vehicula ante commodo. Mauris a justo varius, suscipit purus sed, aliquam quam. Aliquam eros justo, eleifend at mi at, pretium pretium tellus. Pellentesque vitae cursus lorem, non auctor nisl. Morbi diam libero, iaculis quis elit in, pellentesque condimentum ex. Integer in ipsum vehicula tellus viverra auctor sed eget est. Donec dapibus sem lorem, sit amet vehicula ex efficitur vel. In eget urna quis dolor placerat commodo. Cras sit amet diam ac lectus aliquet lobortis quis nec sapien. Etiam faucibus tincidunt ex, non ultrices magna viverra sed. Aliquam risus ex, blandit ut quam ut, convallis efficitur elit. Cras lacinia, diam quis molestie maximus, ligula neque imperdiet leo, quis consectetur erat orci non est."
+    "objectID": "talk_duckcon_2026_ggsql.html#a-quick-example",
+    "href": "talk_duckcon_2026_ggsql.html#a-quick-example",
+    "title": "ggsql",
+    "section": "A quick example",
+    "text": "A quick example\n\nSELECT * FROM 'assets/penguins.parquet'\n  WHERE island == 'Biscoe'\n\n\n\n\nspecies\nisland\nbill_len\nbill_dep\nflipper_len\nbody_mass\nsex\nyear\n\n\n\n\nAdelie\nBiscoe\n37.8\n18.3\n174\n3400\nfemale\n2007\n\n\nAdelie\nBiscoe\n37.7\n18.7\n180\n3600\nmale\n2007\n\n\nAdelie\nBiscoe\n35.9\n19.2\n189\n3800\nfemale\n2007\n\n\nAdelie\nBiscoe\n38.2\n18.1\n185\n3950\nmale\n2007\n\n\nAdelie\nBiscoe\n38.8\n17.2\n180\n3800\nmale\n2007\n\n\nAdelie\nBiscoe\n35.3\n18.9\n187\n3800\nfemale\n2007\n\n\nAdelie\nBiscoe\n40.6\n18.6\n183\n3550\nmale\n2007\n\n\nAdelie\nBiscoe\n40.5\n17.9\n187\n3200\nfemale\n2007\n\n\nAdelie\nBiscoe\n37.9\n18.6\n172\n3150\nfemale\n2007\n\n\nAdelie\nBiscoe\n40.5\n18.9\n180\n3950\nmale\n2007\n\n\nAdelie\nBiscoe\n39.6\n17.7\n186\n3500\nfemale\n2008\n\n\nAdelie\nBiscoe\n40.1\n18.9\n188\n4300\nmale\n2008\n\n\nAdelie\nBiscoe\n35\n17.9\n190\n3450\nfemale\n2008\n\n\nAdelie\nBiscoe\n42\n19.5\n200\n4050\nmale\n2008\n\n\nAdelie\nBiscoe\n34.5\n18.1\n187\n2900\nfemale\n2008\n\n\nAdelie\nBiscoe\n41.4\n18.6\n191\n3700\nmale\n2008\n\n\nAdelie\nBiscoe\n39\n17.5\n186\n3550\nfemale\n2008\n\n\nAdelie\nBiscoe\n40.6\n18.8\n193\n3800\nmale\n2008\n\n\nAdelie\nBiscoe\n36.5\n16.6\n181\n2850\nfemale\n2008\n\n\nAdelie\nBiscoe\n37.6\n19.1\n194\n3750\nmale\n2008\n\n\nAdelie\nBiscoe\n35.7\n16.9\n185\n3150\nfemale\n2008\n\n\nAdelie\nBiscoe\n41.3\n21.1\n195\n4400\nmale\n2008\n\n\nAdelie\nBiscoe\n37.6\n17\n185\n3600\nfemale\n2008\n\n\nAdelie\nBiscoe\n41.1\n18.2\n192\n4050\nmale\n2008\n\n\nAdelie\nBiscoe\n36.4\n17.1\n184\n2850\nfemale\n2008\n\n\nAdelie\nBiscoe\n41.6\n18\n192\n3950\nmale\n2008\n\n\nAdelie\nBiscoe\n35.5\n16.2\n195\n3350\nfemale\n2008\n\n\nAdelie\nBiscoe\n41.1\n19.1\n188\n4100\nmale\n2008\n\n\nAdelie\nBiscoe\n35\n17.9\n192\n3725\nfemale\n2009\n\n\nAdelie\nBiscoe\n41\n20\n203\n4725\nmale\n2009\n\n\nAdelie\nBiscoe\n37.7\n16\n183\n3075\nfemale\n2009\n\n\nAdelie\nBiscoe\n37.8\n20\n190\n4250\nmale\n2009\n\n\nAdelie\nBiscoe\n37.9\n18.6\n193\n2925\nfemale\n2009\n\n\nAdelie\nBiscoe\n39.7\n18.9\n184\n3550\nmale\n2009\n\n\nAdelie\nBiscoe\n38.6\n17.2\n199\n3750\nfemale\n2009\n\n\nAdelie\nBiscoe\n38.2\n20\n190\n3900\nmale\n2009\n\n\nAdelie\nBiscoe\n38.1\n17\n181\n3175\nfemale\n2009\n\n\nAdelie\nBiscoe\n43.2\n19\n197\n4775\nmale\n2009\n\n\nAdelie\nBiscoe\n38.1\n16.5\n198\n3825\nfemale\n2009\n\n\nAdelie\nBiscoe\n45.6\n20.3\n191\n4600\nmale\n2009\n\n\nAdelie\nBiscoe\n39.7\n17.7\n193\n3200\nfemale\n2009\n\n\nAdelie\nBiscoe\n42.2\n19.5\n197\n4275\nmale\n2009\n\n\nAdelie\nBiscoe\n39.6\n20.7\n191\n3900\nfemale\n2009\n\n\nAdelie\nBiscoe\n42.7\n18.3\n196\n4075\nmale\n2009\n\n\nGentoo\nBiscoe\n46.1\n13.2\n211\n4500\nfemale\n2007\n\n\nGentoo\nBiscoe\n50\n16.3\n230\n5700\nmale\n2007\n\n\nGentoo\nBiscoe\n48.7\n14.1\n210\n4450\nfemale\n2007\n\n\nGentoo\nBiscoe\n50\n15.2\n218\n5700\nmale\n2007\n\n\nGentoo\nBiscoe\n47.6\n14.5\n215\n5400\nmale\n2007\n\n\nGentoo\nBiscoe\n46.5\n13.5\n210\n4550\nfemale\n2007\n\n\nGentoo\nBiscoe\n45.4\n14.6\n211\n4800\nfemale\n2007\n\n\nGentoo\nBiscoe\n46.7\n15.3\n219\n5200\nmale\n2007\n\n\nGentoo\nBiscoe\n43.3\n13.4\n209\n4400\nfemale\n2007\n\n\nGentoo\nBiscoe\n46.8\n15.4\n215\n5150\nmale\n2007\n\n\nGentoo\nBiscoe\n40.9\n13.7\n214\n4650\nfemale\n2007\n\n\nGentoo\nBiscoe\n49\n16.1\n216\n5550\nmale\n2007\n\n\nGentoo\nBiscoe\n45.5\n13.7\n214\n4650\nfemale\n2007\n\n\nGentoo\nBiscoe\n48.4\n14.6\n213\n5850\nmale\n2007\n\n\nGentoo\nBiscoe\n45.8\n14.6\n210\n4200\nfemale\n2007\n\n\nGentoo\nBiscoe\n49.3\n15.7\n217\n5850\nmale\n2007\n\n\nGentoo\nBiscoe\n42\n13.5\n210\n4150\nfemale\n2007\n\n\nGentoo\nBiscoe\n49.2\n15.2\n221\n6300\nmale\n2007\n\n\nGentoo\nBiscoe\n46.2\n14.5\n209\n4800\nfemale\n2007\n\n\nGentoo\nBiscoe\n48.7\n15.1\n222\n5350\nmale\n2007\n\n\nGentoo\nBiscoe\n50.2\n14.3\n218\n5700\nmale\n2007\n\n\nGentoo\nBiscoe\n45.1\n14.5\n215\n5000\nfemale\n2007\n\n\nGentoo\nBiscoe\n46.5\n14.5\n213\n4400\nfemale\n2007\n\n\nGentoo\nBiscoe\n46.3\n15.8\n215\n5050\nmale\n2007\n\n\nGentoo\nBiscoe\n42.9\n13.1\n215\n5000\nfemale\n2007\n\n\nGentoo\nBiscoe\n46.1\n15.1\n215\n5100\nmale\n2007\n\n\nGentoo\nBiscoe\n44.5\n14.3\n216\n4100\nnull\n2007\n\n\nGentoo\nBiscoe\n47.8\n15\n215\n5650\nmale\n2007\n\n\nGentoo\nBiscoe\n48.2\n14.3\n210\n4600\nfemale\n2007\n\n\nGentoo\nBiscoe\n50\n15.3\n220\n5550\nmale\n2007\n\n\nGentoo\nBiscoe\n47.3\n15.3\n222\n5250\nmale\n2007\n\n\nGentoo\nBiscoe\n42.8\n14.2\n209\n4700\nfemale\n2007\n\n\nGentoo\nBiscoe\n45.1\n14.5\n207\n5050\nfemale\n2007\n\n\nGentoo\nBiscoe\n59.6\n17\n230\n6050\nmale\n2007\n\n\nGentoo\nBiscoe\n49.1\n14.8\n220\n5150\nfemale\n2008\n\n\nGentoo\nBiscoe\n48.4\n16.3\n220\n5400\nmale\n2008\n\n\nGentoo\nBiscoe\n42.6\n13.7\n213\n4950\nfemale\n2008\n\n\nGentoo\nBiscoe\n44.4\n17.3\n219\n5250\nmale\n2008\n\n\nGentoo\nBiscoe\n44\n13.6\n208\n4350\nfemale\n2008\n\n\nGentoo\nBiscoe\n48.7\n15.7\n208\n5350\nmale\n2008\n\n\nGentoo\nBiscoe\n42.7\n13.7\n208\n3950\nfemale\n2008\n\n\nGentoo\nBiscoe\n49.6\n16\n225\n5700\nmale\n2008\n\n\nGentoo\nBiscoe\n45.3\n13.7\n210\n4300\nfemale\n2008\n\n\nGentoo\nBiscoe\n49.6\n15\n216\n4750\nmale\n2008\n\n\nGentoo\nBiscoe\n50.5\n15.9\n222\n5550\nmale\n2008\n\n\nGentoo\nBiscoe\n43.6\n13.9\n217\n4900\nfemale\n2008\n\n\nGentoo\nBiscoe\n45.5\n13.9\n210\n4200\nfemale\n2008\n\n\nGentoo\nBiscoe\n50.5\n15.9\n225\n5400\nmale\n2008\n\n\nGentoo\nBiscoe\n44.9\n13.3\n213\n5100\nfemale\n2008\n\n\nGentoo\nBiscoe\n45.2\n15.8\n215\n5300\nmale\n2008\n\n\nGentoo\nBiscoe\n46.6\n14.2\n210\n4850\nfemale\n2008\n\n\nGentoo\nBiscoe\n48.5\n14.1\n220\n5300\nmale\n2008\n\n\nGentoo\nBiscoe\n45.1\n14.4\n210\n4400\nfemale\n2008\n\n\nGentoo\nBiscoe\n50.1\n15\n225\n5000\nmale\n2008\n\n\nGentoo\nBiscoe\n46.5\n14.4\n217\n4900\nfemale\n2008\n\n\nGentoo\nBiscoe\n45\n15.4\n220\n5050\nmale\n2008\n\n\n... 68 more rows"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#a-quick-example-1",
+    "href": "talk_duckcon_2026_ggsql.html#a-quick-example-1",
+    "title": "ggsql",
+    "section": "A quick example",
+    "text": "A quick example\n\nINSTALL ggsql FROM community;\nLOAD ggsql;\n\nSELECT * FROM 'assets/penguins.parquet'\n  WHERE island == 'Biscoe'"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#a-quick-example-2",
+    "href": "talk_duckcon_2026_ggsql.html#a-quick-example-2",
+    "title": "ggsql",
+    "section": "A quick example",
+    "text": "A quick example\n\nINSTALL ggsql FROM community;\nLOAD ggsql;\n\nSELECT * FROM 'assets/penguins.parquet'\n  WHERE island == 'Biscoe'\n\nVISUALISE bill_len AS x, bill_dep AS y\n  DRAW point"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#a-quick-example-3",
+    "href": "talk_duckcon_2026_ggsql.html#a-quick-example-3",
+    "title": "ggsql",
+    "section": "A quick example",
+    "text": "A quick example\n\nINSTALL ggsql FROM community;\nLOAD ggsql;\n\nSELECT * FROM 'assets/penguins.parquet'\n  WHERE island == 'Biscoe'\n\nVISUALISE bill_len AS x, bill_dep AS y\n  DRAW point\n  DRAW smooth"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#a-quick-example-4",
+    "href": "talk_duckcon_2026_ggsql.html#a-quick-example-4",
+    "title": "ggsql",
+    "section": "A quick example",
+    "text": "A quick example\n\nINSTALL ggsql FROM community;\nLOAD ggsql;\n\nSELECT * FROM 'assets/penguins.parquet'\n  WHERE island == 'Biscoe'\n\nVISUALISE bill_len AS x, bill_dep AS y, species AS colour\n  DRAW point\n  DRAW smooth"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#ggplot2-is-most-popular-visualisation-method-in-r",
+    "href": "talk_duckcon_2026_ggsql.html#ggplot2-is-most-popular-visualisation-method-in-r",
+    "title": "ggsql",
+    "section": "ggplot2 is most popular visualisation method in R",
+    "text": "ggplot2 is most popular visualisation method in R\n\n18 years of ggplot2 development\nConstrained by backward compatibility\nggsql is carte blanche for new ideas"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#grammar-of-graphics",
+    "href": "talk_duckcon_2026_ggsql.html#grammar-of-graphics",
+    "title": "ggsql",
+    "section": "Grammar of Graphics",
+    "text": "Grammar of Graphics"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#why-are-we-building-this",
+    "href": "talk_duckcon_2026_ggsql.html#why-are-we-building-this",
+    "title": "ggsql",
+    "section": "Why are we building this?",
+    "text": "Why are we building this?"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#why-are-we-building-this-1",
+    "href": "talk_duckcon_2026_ggsql.html#why-are-we-building-this-1",
+    "title": "ggsql",
+    "section": "Why are we building this?",
+    "text": "Why are we building this?"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#why-are-we-building-this-2",
+    "href": "talk_duckcon_2026_ggsql.html#why-are-we-building-this-2",
+    "title": "ggsql",
+    "section": "Why are we building this?",
+    "text": "Why are we building this?"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#why-are-we-not-building-that-1",
+    "href": "talk_duckcon_2026_ggsql.html#why-are-we-not-building-that-1",
+    "title": "ggsql",
+    "section": "Why are we not building that?",
+    "text": "Why are we not building that?\nClosed source point and click BI tools"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#minard-example",
+    "href": "talk_duckcon_2026_ggsql.html#minard-example",
+    "title": "ggsql",
+    "section": "Minard example",
+    "text": "Minard example"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#minard-example-1",
+    "href": "talk_duckcon_2026_ggsql.html#minard-example-1",
+    "title": "ggsql",
+    "section": "Minard example",
+    "text": "Minard example\n\nSELECT * FROM 'assets/minard_troops.csv' \nLIMIT 5\n\n\n\n\nlong\nlat\nsurvivors\ndirection\ngroup\n\n\n\n\n37.7\n55.7\n100000\nR\n1\n\n\n37.5\n55.7\n98000\nR\n1\n\n\n37\n55\n97000\nR\n1\n\n\n36.8\n55\n96000\nR\n1\n\n\n35.4\n55.3\n87000\nR\n1"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-2",
+    "href": "talk_duckcon_2026_ggsql.html#section-2",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-3",
+    "href": "talk_duckcon_2026_ggsql.html#section-3",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    PARTITION BY direction, group"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-4",
+    "href": "talk_duckcon_2026_ggsql.html#section-4",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    MAPPING direction AS stroke\n    PARTITION BY direction, group"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-5",
+    "href": "talk_duckcon_2026_ggsql.html#section-5",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-6",
+    "href": "talk_duckcon_2026_ggsql.html#section-6",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-7",
+    "href": "talk_duckcon_2026_ggsql.html#section-7",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-8",
+    "href": "talk_duckcon_2026_ggsql.html#section-8",
+    "title": "ggsql",
+    "section": "",
+    "text": "SELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-9",
+    "href": "talk_duckcon_2026_ggsql.html#section-9",
+    "title": "ggsql",
+    "section": "",
+    "text": "LOAD spatial;\nSELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  PROJECT x, y TO mercator\n    SETTING origin =&gt; (30, 55)\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-10",
+    "href": "talk_duckcon_2026_ggsql.html#section-10",
+    "title": "ggsql",
+    "section": "",
+    "text": "LOAD spatial;\nSELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW spatial MAPPING FROM 'assets/countries.parquet'\n    SETTING fill =&gt; 'cornsilk'\n    FILTER continent == 'Europe'\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  PROJECT x, y TO mercator\n    SETTING origin =&gt; (30, 55)\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-11",
+    "href": "talk_duckcon_2026_ggsql.html#section-11",
+    "title": "ggsql",
+    "section": "",
+    "text": "LOAD spatial;\nSELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW spatial MAPPING FROM 'assets/countries.parquet'\n    SETTING fill =&gt; 'cornsilk'\n    FILTER continent == 'Europe'\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  PROJECT x, y TO albers\n    SETTING origin =&gt; (30, 55)\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-12",
+    "href": "talk_duckcon_2026_ggsql.html#section-12",
+    "title": "ggsql",
+    "section": "",
+    "text": "LOAD spatial;\nSELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW spatial MAPPING FROM 'assets/countries.parquet'\n    SETTING fill =&gt; 'cornsilk'\n    FILTER continent == 'Europe'\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  PROJECT x, y TO orthographic\n    SETTING origin =&gt; (30, 55)\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-13",
+    "href": "talk_duckcon_2026_ggsql.html#section-13",
+    "title": "ggsql",
+    "section": "",
+    "text": "LOAD spatial;\nSELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW spatial MAPPING FROM 'assets/countries.parquet'\n    SETTING fill =&gt; 'cornsilk'\n    FILTER continent == 'Europe'\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  PROJECT x, y TO orthographic SETTING \n    origin =&gt; (30, 55), \n    bounds =&gt; (-500000, -150000, 500000, 150000)\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#section-14",
+    "href": "talk_duckcon_2026_ggsql.html#section-14",
+    "title": "ggsql",
+    "section": "",
+    "text": "LOAD spatial;\nSELECT * FROM 'assets/minard_troops.csv' \nVISUALISE long AS x, lat AS y\n  DRAW spatial MAPPING FROM 'assets/countries.parquet'\n    SETTING fill =&gt; 'cornsilk'\n    FILTER continent == 'Europe'\n  DRAW path\n    MAPPING \n      direction AS stroke, \n      survivors AS linewidth\n    PARTITION BY direction, group\n  DRAW text\n    MAPPING city AS label FROM 'assets/minard_cities.csv'\n    SETTING fontsize =&gt; 6\n  PROJECT x, y TO orthographic SETTING \n    origin =&gt; (30, 55), \n    bounds =&gt; (-500000, -150000, 500000, 150000)\n  SCALE stroke TO ('burlywood', 'black')\n    RENAMING 'A' =&gt; 'Advance', 'R' =&gt; 'Retreat'\n  SCALE linewidth FROM (0, null) TO (0, 20)\n  LABEL\n    title =&gt; 'Napoleon\\'s Russian Campaign',\n    subtitle =&gt; 'Inspired by the graphic of C.J. Minard',\n    linewidth =&gt; 'Troops',\n    stroke =&gt; 'Direction'"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#get-yours-today",
+    "href": "talk_duckcon_2026_ggsql.html#get-yours-today",
+    "title": "ggsql",
+    "section": "Get yours today",
+    "text": "Get yours today\nGoal:\nAvailable wherever SQL is\n\nggsql.org interactive example\n\nlanguage support (Positron / VS Code)\nkernel for Jupyter and Quarto\ncommand line interface\nR/Python wrappers\nWebAssembly\n\nDuckDB extension:\n\nINSTALL ggsql FROM community;\nLOAD ggsql;"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#in-closing",
+    "href": "talk_duckcon_2026_ggsql.html#in-closing",
+    "title": "ggsql",
+    "section": "In closing",
+    "text": "In closing\n\nNew SQL-based tool for data visualisation\nBased on declarative grammar of graphics\nDuckDB is a first-class citizen"
+  },
+  {
+    "objectID": "talk_duckcon_2026_ggsql.html#thank-you",
+    "href": "talk_duckcon_2026_ggsql.html#thank-you",
+    "title": "ggsql",
+    "section": "Thank you!",
+    "text": "Thank you!\n\nPosit PBC:\n\nThomas Lin Pedersen\nGeorge Stagg\nHadley Wickham"
   }
 ]
